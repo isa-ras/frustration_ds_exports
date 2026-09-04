@@ -4,8 +4,7 @@
 # requires-python = ">=3.14"
 # dependencies = [
 #   "datasets",
-#   "openpyxl",
-#   "pandas",
+#   "pandas[excel]",
 # ]
 # ///
 
