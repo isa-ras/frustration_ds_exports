@@ -1,0 +1,21 @@
+name: Deploy to HuggingFace
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # OIDC requirment
+
+    steps:
+      - uses: cachix/install-nix-action@v31
+      - uses: actions/checkout@v4
+      - run: nix run .#process_data
+        env:
+          HF_TOKEN: ${{ secrets.WRITE_HF_FRUSTRATION_DATASET }}
+
