@@ -38,7 +38,7 @@ if __name__ == "__main__":
         if file.name in BLACKLIST:
             continue
         dataset_name = file.stem.split(" - ", maxsplit=1)[0]
-        labeler_count = len(pd.read_excel(file, nrows=0).columns) - 1
+        labeler_count = len(pd.read_excel(file, nrows=0, engine="openpyxl").columns) - 1
         if (
             dataset_name not in dataset2file_and_label_pattern
             or labeler_count
@@ -49,7 +49,7 @@ if __name__ == "__main__":
             )
 
     for dataset_name, (file, _) in dataset2file_and_label_pattern.items():
-        data = pd.read_excel(file)
+        data = pd.read_excel(file, engine="openpyxl")
         label_columns = data.columns.drop("текст")
         if "источник" in label_columns:
             label_columns = label_columns.drop("источник")
